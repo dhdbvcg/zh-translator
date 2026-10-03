@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+
+# 虚拟环境
+.venv/
+venv/
+env/
+
+# 模型权重(约 630MB,由 scripts/download_model.py 下载生成)
+models/
+*.bin
+*.safetensors
+
+# 密钥与配置:绝不入库
+apikey.md
+*.key
+*.pem
+.env
+.env.*
+secrets.json
+credentials.json
+
+# 翻译产物与临时输出
+translated/
+*.zh.html
+*.zh.srt
+eval/out_*.srt
+eval/sample.zh.*
+
+# 编辑器 / 系统
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 调试脚本
+scripts/_*.py
+tests/_*.py
+eval/_*.py
+src/zh_translator/_*.txt

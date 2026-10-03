@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zh-translator"
+version = "1.0.0"
+description = "多语种(含小语种) -> 简体中文 本地 AI 翻译工具"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "ctranslate2>=4.0",
+    "sentencepiece>=0.1.99",
+    "sacremoses>=0.0.53",
+    "transformers>=4.40",
+    "torch>=2.6",
+    "huggingface_hub>=0.23",
+]
+
+[project.scripts]
+zhtrans = "zh_translator.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

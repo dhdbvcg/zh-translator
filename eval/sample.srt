@@ -1,0 +1,14 @@
+1
+00:00:01,000 --> 00:00:04,000
+Good morning, everyone.
+
+2
+00:00:04,500 --> 00:00:08,000
+Welcome to the conference.
+We are glad to see you.
+
+3
+00:00:08,200 --> 00:00:12,000
+Today we will discuss machine learning.
+and its applications in translation.
+

@@ -1,0 +1,15 @@
+const fs = require('fs');
+const html = fs.readFileSync('C:/Users/dell/GitHub/zh-translator/web/index.html', 'utf8');
+const js = fs.readFileSync('C:/Users/dell/GitHub/zh-translator/web/app.js', 'utf8');
+const htmlIds = new Set([...html.matchAll(/id="([A-Za-z0-9_]+)"/g)].map(m => m[1]));
+const used = new Set([...js.matchAll(/\$\('([A-Za-z0-9_]+)'\)/g)].map(m => m[1]));
+const used2 = new Set([...js.matchAll(/\$\("([A-Za-z0-9_]+)"\)/g)].map(m => m[1]));
+const all = new Set([...used, ...used2]);
+console.log('HTML ids      :', htmlIds.size);
+console.log('JS 引用 (单引号):', used.size);
+console.log('JS 引用 (双引号):', used2.size);
+console.log('JS 引用合计     :', all.size);
+const missing = [...all].filter(x => !htmlIds.has(x));
+console.log('JS 引用但 HTML 缺失:', missing.length ? missing.join(', ') : '无');
+const unused = [...htmlIds].filter(x => !all.has(x));
+console.log('HTML 有但 JS 未用  :', unused.length ? unused.join(', ') : '无');

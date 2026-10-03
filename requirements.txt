@@ -1,0 +1,8 @@
+ctranslate2>=4.0
+sentencepiece>=0.1.99
+sacremoses>=0.0.53
+transformers>=4.40
+torch>=2.6
+torchvision>=0.21
+huggingface_hub>=0.23
+opencc-python-reimplemented>=0.1.7

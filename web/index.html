@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多语种中文翻译 · 测试台</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">译</span>
+    <div>
+      <h1>多语种中文翻译 · 测试台</h1>
+      <p class="sub">任意语言（含小语种） → 简体中文 · 完全本地运行</p>
+    </div>
+  </div>
+  <div class="status" id="status">
+    <span class="dot" id="dot"></span>
+    <span id="statusText">连接中…</span>
+  </div>
+</header>
+
+<main>
+  <!-- ============ 翻译台 ============ -->
+  <section class="card" id="panel-translate">
+    <div class="card-head">
+      <h2>翻译台</h2>
+      <div class="head-actions">
+        <label class="field inline">
+          <span>源语种</span>
+          <select id="srcLang"><option value="auto">自动识别</option></select>
+        </label>
+        <label class="field inline">
+          <span>目标</span>
+          <select id="dstLang">
+            <option value="zh">简体中文</option>
+            <option value="zh-Hant">繁体中文</option>
+          </select>
+        </label>
+        <label class="field inline">
+          <span>速度</span>
+          <select id="speed">
+            <option value="auto">自动(推荐)</option>
+            <option value="fast">极速</option>
+            <option value="balanced">均衡</option>
+            <option value="quality">高质量</option>
+          </select>
+        </label>
+        <label class="field inline" title="留空则按速度档位自动选择">
+          <span>beam</span>
+          <input id="beam" type="number" min="1" max="8" placeholder="自动">
+        </label>
+      </div>
+    </div>
+
+    <div class="io-grid">
+      <div class="io">
+        <div class="io-head">
+          <span>原文</span>
+          <span class="io-meta" id="detectMeta"></span>
+        </div>
+        <textarea id="input" spellcheck="false"
+          placeholder="粘贴任意语言的文本,回车翻译&#10;例:Hello world / こんにちは / Привет / Habari za asubuhi"></textarea>
+        <div class="samples" id="samples"></div>
+      </div>
+
+      <div class="io">
+        <div class="io-head">
+          <span>译文</span>
+          <span class="io-meta" id="timing"></span>
+        </div>
+        <textarea id="output" readonly spellcheck="false"
+          placeholder="译文将显示在这里"></textarea>
+        <div class="io-foot">
+          <label class="check">
+            <input type="checkbox" id="glossaryOn">
+            <span>启用术语表</span>
+          </label>
+          <input type="text" id="glossary" class="glossary"
+            placeholder='{"开放人工智能":"OpenAI"}' disabled>
+          <button class="btn ghost" id="btnSwap" type="button">↓ 复制译文</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 批量翻译 ============ -->
+  <section class="card" id="panel-batch">
+    <div class="card-head">
+      <h2>批量翻译</h2>
+      <div class="head-actions">
+        <button class="btn ghost" id="btnFillBatch" type="button">填入样例</button>
+        <button class="btn primary" id="btnBatch" type="button">开始批量翻译</button>
+      </div>
+    </div>
+    <textarea id="batchInput" spellcheck="false"
+      placeholder="每行一句,可混合语种&#10;Hello world&#10;Guten Tag&#10;Bonjour&#10;こんにちは"></textarea>
+    <div class="batch-out" id="batchOut"></div>
+  </section>
+
+  <!-- ============ 自检 ============ -->
+  <section class="card" id="panel-selftest">
+    <div class="card-head">
+      <h2>接口自检</h2>
+      <div class="head-actions">
+        <button class="btn ghost" id="btnLangs" type="button">拉取语种表</button>
+        <button class="btn primary" id="btnSelfTest" type="button">运行全部自检</button>
+      </div>
+    </div>
+    <div class="test-summary" id="testSummary">
+      <span class="muted">尚未运行。点击「运行全部自检」将依次验证下列接口。</span>
+    </div>
+    <div class="test-list" id="testList"></div>
+  </section>
+
+  <!-- ============ 语种表 ============ -->
+  <section class="card" id="panel-langs">
+    <div class="card-head">
+      <h2>支持的语种</h2>
+      <div class="head-actions">
+        <input type="search" id="langSearch" placeholder="搜索语种…">
+        <select id="langFilter">
+          <option value="all">全部</option>
+          <option value="high">语料充足 ★</option>
+          <option value="mid">中等 ☆</option>
+          <option value="low">低资源 ·</option>
+        </select>
+        <span class="io-meta" id="langCount"></span>
+      </div>
+    </div>
+    <div class="lang-grid" id="langGrid"></div>
+  </section>
+</main>
+
+<footer>
+  <span>zh-translator · NLLB-200 distilled 600M · int8</span>
+  <span>本页面为本地测试工具,不会向外部发送任何数据</span>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
