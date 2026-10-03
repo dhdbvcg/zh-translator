@@ -41,16 +41,28 @@ def make_handler(translator, static_dir=None):
         def log_message(self, fmt, *args):  # 静默默认访问日志
             pass
 
+        def handle_one_request(self):
+            # 客户端在响应写完前断开(网页刷新、请求超时、Ctrl-C 退出)
+            # 属正常现象,不该在终端打一整屏堆栈。
+            try:
+                BaseHTTPRequestHandler.handle_one_request(self)
+            except (ConnectionAbortedError, ConnectionResetError, BrokenPipeError):
+                self.close_connection = True
+
         # ---------- 工具 ----------
 
         def _send(self, code: int, payload: dict):
             body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
-            self.send_response(code)
-            self.send_header("Content-Type", "application/json; charset=utf-8")
-            self.send_header("Content-Length", str(len(body)))
-            self.send_header("Access-Control-Allow-Origin", "*")
-            self.end_headers()
-            self.wfile.write(body)
+            try:
+                self.send_response(code)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Content-Length", str(len(body)))
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(body)
+            except (ConnectionAbortedError, ConnectionResetError, BrokenPipeError):
+                # 客户端提前断开(页面刷新/超时)是正常现象,静默处理
+                self.close_connection = True
 
         def _read_json(self):
             length = int(self.headers.get("Content-Length") or 0)
