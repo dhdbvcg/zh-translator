@@ -259,4 +259,4 @@ eval/             benchmark.py, sample.srt, sample.html
 - 简繁:默认简体;`target="zh-Hant"` 输出繁体
 - 长文本:超过 2000 字符自动切分后翻译
 - 若安装了 `langid`,会自动优先使用以提升识别准确率
-- 许可:NLLB-200 为 CC-BY-NC-4.0(**非商用**),商用需换用其他基座
+- 许可:代码 MIT;**模型权重 NLLB-200 为 CC-BY-NC-4.0(禁商用)**,详见 [MODEL_LICENSE.md](MODEL_LICENSE.md)

@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 zh-translator contributors
+Copyright (c) 2026 dhdbvcg
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,33 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-## 关于模型权重(重要)
-
-本仓库**不包含**任何模型权重文件。`models/` 已被 .gitignore 排除。
-权重由 `scripts/download_model.py` 在本地从 Hugging Face 下载。
-
-默认基座模型是 **facebook/nllb-200-distilled-600M**,
-其许可为 **CC-BY-NC-4.0(禁止商业用途)**。
-
-这意味着:
-
-- 本代码(MIT)可以自由商用;
-- 但若使用默认基座模型,**仅限非商业用途**;
-- 商用请将 `--model` 指向你有权商业使用的其他模型,
-  或在 `src/zh_translator/engine.py` 中替换 `_translate_chunks` 的实现。
-
-详见 <https://huggingface.co/facebook/nllb-200-distilled-600M>。
-
-## 第三方依赖
-
-| 组件 | 许可 |
-|------|------|
-| CTranslate2 | MIT |
-| PyTorch | BSD-3-Clause |
-| Transformers | Apache-2.0 |
-| NLLB-200 (权重) | CC-BY-NC-4.0 |
-| OpenCC | Apache-2.0 |
-| SentencePiece | Apache-2.0 |
